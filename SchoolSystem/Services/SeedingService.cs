@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
 using SchoolSystem.Models;
 
@@ -53,7 +54,7 @@ public class SeedingService {
     }
 
     public async Task SeedDatabase() {
-        if (_context.Instructors.Any() || _context.Students.Any() || _context.Departments.Any() || _context.Courses.Any()) {
+        if (await _context.Instructors.AnyAsync() || await _context.Students.AnyAsync() || await _context.Departments.AnyAsync() || await _context.Courses.AnyAsync()) {
             return; // Database has already been seeded
         }
 
