@@ -3,7 +3,7 @@ using SchoolSystem.Data;
 using SchoolSystem.Models;
 
 namespace SchoolSystem.Services;
-public class SeedingService {
+public class SeedingService {    
     private readonly ApplicationDbContext _context;
 
     public SeedingService(ApplicationDbContext context) {
