@@ -1,7 +1,9 @@
 ﻿
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SchoolSystem.Data;
+using SchoolSystem.Models;
 using SchoolSystem.Services;
 
 ServiceProvider _serviceProvider;
@@ -29,9 +31,8 @@ _basicQueryService = _serviceProvider.GetRequiredService<BasicQueryService>();
 // Call method to seed the database
 await _seedingService.SeedDatabase();
 
-List<string> instrNames = 
-    await _basicQueryService.GetAllInstructorNames();
+Instructor? instructor = await _basicQueryService.GetInstructorById(3);
 
-foreach(string name in instrNames) {
-    Console.WriteLine($"Name: {name}");
-}
+Console.WriteLine($"\nDept: {instructor.Department.Name}\n");
+
+// Console.WriteLine(JsonSerializer.Serialize(instructor, new JsonSerializerOptions { WriteIndented = true }));

@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Data;
+using SchoolSystem.Models;
 
 namespace SchoolSystem.Services;
 
@@ -13,7 +14,7 @@ public class BasicQueryService {
         _context = context;
     }
 
-    public async Task< List<string> > GetAllInstructorNames() {
+    public async Task<List<string>> GetAllInstructorNames() {
         /*
             SELECT FirstName
             FROM Instructors
@@ -23,7 +24,15 @@ public class BasicQueryService {
             .ToListAsync();
     }
 
-    public async Task< List<string> > GetDeptNamesWithMoreThanOneCourse() {
+    public async Task<Instructor?> GetInstructorById(int instructorId) {
+        // return await _context.Instructors.FindAsync(instructorId);
+
+        return await _context.Instructors
+            .Include(instr => instr.Department)
+            .SingleOrDefaultAsync(instr => instr.Id == instructorId);
+    }
+
+    public async Task<List<string>> GetDeptNamesWithMoreThanOneCourse() {
         /*
             SELECT Name
             FROM Departments
