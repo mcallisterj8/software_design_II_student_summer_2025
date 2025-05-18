@@ -25,7 +25,7 @@ public class BasicQueryService {
     }
 
     public async Task<Instructor?> GetInstructorById(int instructorId) {
-        // return await _context.Instructors.FindAsync(instructorId);
+        // return await _context.Instructors.FindAsync(instructorId); // return await _context.Instructors.FindAsync(instructorId); // This is EF Core Find() - different than regular LINQ Find()
 
         return await _context.Instructors
             .Include(instr => instr.Department)
