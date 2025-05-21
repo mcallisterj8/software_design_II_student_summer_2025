@@ -22,4 +22,22 @@ public class BasicQueryService {
             .Include(instr => instr.Department)
             .SingleOrDefaultAsync();
     }
+
+    public async Task<InstructorDto?> GetInstructorDtoByIdWithDept(int instructorId) {
+        return await _context.Instructors
+            .Where(instr => instr.Id == instructorId)
+            .Include(instr => instr.Department)
+            .Select(instr => new InstructorDto {
+                Id = instr.Id,
+                FirstName = instr.FirstName,
+                LastName = instr.LastName,
+                JoiningDate = instr.JoiningDate,
+                Department = new DepartmentDto {
+                    Id = instr.Department.Id,
+                    Name = instr.Department.Name
+                }
+            })
+            .SingleOrDefaultAsync();
+    }
+
 }

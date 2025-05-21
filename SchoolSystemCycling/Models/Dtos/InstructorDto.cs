@@ -9,4 +9,6 @@ public class InstructorDto {
 
     public DateTime JoiningDate { get; set; }
 
+    public DepartmentDto? Department { get; set; }
+
 }
