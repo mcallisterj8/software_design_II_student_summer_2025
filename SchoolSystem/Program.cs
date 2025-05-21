@@ -35,16 +35,16 @@ Instructor? instructor = await _basicQueryService.GetInstructorById(3);
 
 Console.WriteLine($"\nDept: {instructor.Department.Name}\n");
 
-var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+// var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
 
 // Console.WriteLine(JsonSerializer.Serialize(instructor, jsonOptions));
 
-Console.WriteLine("\n============== GetInstructorObjectById ====================");
+// Console.WriteLine("\n============== GetInstructorObjectById ====================");
 
-var instrObj = await _basicQueryService.GetInstructorObjectById(3);
-Console.WriteLine(JsonSerializer.Serialize(instrObj, jsonOptions));
+// var instrObj = await _basicQueryService.GetInstructorObjectById(3);
+// Console.WriteLine(JsonSerializer.Serialize(instrObj, jsonOptions));
 
-Console.WriteLine("\n============== GetInstructorDtoById ====================");
+// Console.WriteLine("\n============== GetInstructorDtoById ====================");
 
-var instrDto = await _basicQueryService.GetInstructorDtoById(3);
-Console.WriteLine(JsonSerializer.Serialize(instrObj, jsonOptions));
+// var instrDto = await _basicQueryService.GetInstructorDtoById(3);
+// Console.WriteLine(JsonSerializer.Serialize(instrObj, jsonOptions));

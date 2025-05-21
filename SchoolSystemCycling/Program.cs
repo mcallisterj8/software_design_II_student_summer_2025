@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolSystemCycling.Data;
+using SchoolSystemCycling.Models.Entities;
 using SchoolSystemCycling.Services;
 
 ServiceProvider _serviceProvider;
@@ -31,4 +32,18 @@ _basicQueryService = _serviceProvider.GetRequiredService<BasicQueryService>();
 await _seedingService.SeedDatabase();
 
 JsonSerializerOptions jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+
+Console.WriteLine("\n=========== GetInstructorByIdWithDept() =============\n");
+
+Instructor? instructorWithDept = await _basicQueryService
+    .GetInstructorByIdWithDept(3);
+
+Console.WriteLine($"1) {instructorWithDept}");
+
+Console.WriteLine($"\n2) Instructor: {instructorWithDept.LastName} in Dept: {instructorWithDept.Department.Name}");
+
+Console.WriteLine($"\n3) {instructorWithDept.Department}");
+
+Console.WriteLine($"\n4) Instr Obj Serialized {JsonSerializer.Serialize(instructorWithDept)}");
+
 
