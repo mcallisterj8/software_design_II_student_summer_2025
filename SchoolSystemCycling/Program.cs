@@ -44,6 +44,6 @@ Console.WriteLine($"\n2) Instructor: {instructorWithDept.LastName} in Dept: {ins
 
 Console.WriteLine($"\n3) {instructorWithDept.Department}");
 
-Console.WriteLine($"\n4) Instr Obj Serialized {JsonSerializer.Serialize(instructorWithDept)}");
+Console.WriteLine($"\n4) Instr Obj Serialized {JsonSerializer.Serialize(instructorWithDept, jsonOptions)}");
 
 

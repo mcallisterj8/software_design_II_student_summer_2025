@@ -10,5 +10,5 @@ public class Department {
     public required string Name { get; set; }
 
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
-    public virtual ICollection<Instructor> Instructors { get; set; } = new List<Instructor>();
+    // public virtual ICollection<Instructor> Instructors { get; set; } = new List<Instructor>();
 }
