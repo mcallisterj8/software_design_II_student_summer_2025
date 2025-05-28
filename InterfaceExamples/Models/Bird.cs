@@ -1,4 +1,4 @@
-public class Bird : Animal, IFlyable, IComparable {
+public class Bird : Animal, IFlyable {
 
     public void Fly() {
         Console.WriteLine("The bird is flying.");
@@ -8,11 +8,5 @@ public class Bird : Animal, IFlyable, IComparable {
         Console.WriteLine("Tweet!");
     }
 
-    public void Land() {
-        throw new NotImplementedException();
-    }
 
-    public int CompareTo(object? obj) {
-        throw new NotImplementedException();
-    }
 }
