@@ -29,20 +29,17 @@ public class CrudService {
         .ToListAsync();
     }
 
-    // Example: Get student by ID, with their courses
     public async Task<Student?> GetStudentByIdAsync(int id) {
         return await _context.Students
             .Include(s => s.Courses)
             .SingleOrDefaultAsync(s => s.Id == id);
     }
 
-    // Get a student by full name (for testing inserts and updates)
     public async Task<Student?> GetStudentByNameAsync(string firstName, string lastName) {
         return await _context.Students
             .FirstOrDefaultAsync(s => s.FirstName == firstName && s.LastName == lastName);
     }
 
-    // Get all students in a course
     public async Task<List<Student>> GetStudentsInCourseAsync(int courseId) {
         var course = await _context.Courses
             .Include(c => c.Students)
@@ -51,4 +48,75 @@ public class CrudService {
         return course?.Students.ToList() ?? new List<Student>();
     }
 
+    /************************************************************
+    *********************** CRUD METHODS ************************
+    ************************************************************/
+    public async Task<bool> AddStudentAsync(Student student) {
+        if (null == student) {
+            return false;
+        }
+
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<Student?> UpdateStudentAsync(Student studentDetails) {
+        var student = await _context.Students.FindAsync(studentDetails.Id);
+
+        if (null != student) {
+            _context.Students.Update(student);
+            await _context.SaveChangesAsync();
+        }
+        return student;
+    }
+
+    public async Task<Student?> UpdateStudentNameAsync(int studentId, string newFirstName, string newLastName) {
+        var student = await _context.Students.FindAsync(studentId);
+
+        if (null != student) {
+            student.FirstName = newFirstName;
+            student.LastName = newLastName;
+
+            await _context.SaveChangesAsync();
+        }
+
+        return student;
+    }
+
+    public async Task<bool> EnrollStudentInCourseAsync(int studentId, int courseId) {
+        var student = await _context.Students.FindAsync(studentId);
+
+        if (null == student) {
+            return false;
+        }
+
+        var course = await _context.Courses
+            .Include(c => c.Students)
+            .SingleOrDefaultAsync(c => c.Id == courseId);
+
+        if (null == course) {
+            return false;
+        }
+
+        course.Students.Add(student);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> DeleteStudent(int id) {
+        bool result = false;
+        var student = await _context.Students.FindAsync(id);
+
+        if (null != student) {
+            _context.Students.Remove(student);
+
+            await _context.SaveChangesAsync();
+            result = true;
+        }
+
+        return result;
+    }
 }
