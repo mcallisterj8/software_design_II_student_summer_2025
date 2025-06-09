@@ -8,8 +8,8 @@ public class PostTag {
         in the ApplicationDbContext's OnModelConfiguring method to have
         EF Core setup database as intended.
     */
-    public int PostId { get; set; }
-    public int TagId { get; set; }
+    // public int PostId { get; set; }
+    // public int TagId { get; set; }
 
     /*
         Non-conventional key names.
@@ -18,6 +18,6 @@ public class PostTag {
         in the ApplicationDbContext's OnModelConfiguring method to have
         EF Core setup database as intended.
     */
-    // public int Pid { get; set; }
-    // public int Tid { get; set; }
+    public int Pid { get; set; }
+    public int Tid { get; set; }
 }
